@@ -9,41 +9,39 @@ Yes
 Explanation
 13 + 53 + 33 = 1 + 125 + 27 = 153
 */
-#include <iostream>
-#include <cmath>
-using namespace std;
+#include <bits/stdc++.h>
+using namespace std; 
+int main(){
+    int num; 
+    cin >> num; 
+    int sumOfCubeOfDigits = 0; 
+    int origNum = num; 
 
-int main() {
-    int num, checkNum, remainder, sum = 0;
+    // extracting the digits
+    int temp = num; 
+    int size = 0; 
 
-    
-    cout << "Enter an integer: ";
-    cin >> num;
-
-    
-    checkNum = num;
-
-    
-    int digits = 0;
-    int temp = num;
-    while (temp > 0) {
-        digits++;
-        temp /= 10;
-    }
-    
-    temp = num;
-    while (temp > 0) {
-        remainder = temp % 10;          
-        sum += pow(remainder, digits);
-    
-        temp /= 10;                      
+    while (temp) {
+        size++; 
+        temp /= 10; 
     }
 
-    if (sum == checkNum) {
-        cout << num << "  Armstrong number." << endl;
+    while (num) {
+        int digit = num % 10; 
+        int power = 1; 
+
+        for (int i = 0; i < size; i++) {
+            power *= digit; 
+        }
+
+        sumOfCubeOfDigits += power; 
+        num /= 10; 
+    }
+
+    if (origNum == sumOfCubeOfDigits) {
+        cout << "YES" << endl; 
     } else {
-        cout << num << " not an Armstrong number." << endl;
+        cout << "NO" << endl; 
     }
-
-    return 0;
 }
+
